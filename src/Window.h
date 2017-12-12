@@ -9,6 +9,7 @@
 
 class Window {
 public:
+	Window(int32 width, int32 height, const char title[]);
 	Window(int32 width, int32 height, const char title[], bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples);
 
 	void poll();

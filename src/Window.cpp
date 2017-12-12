@@ -13,6 +13,13 @@ double mouseX, mouseY;
 double scrollX, scrollY;
 bool mouseLeft, mouseRight;
 
+//simple window constructor
+Window::Window(int32 width, int32 height, const char title[])
+{
+	init(width, height, title, false, true, true, false, false, 17);
+}
+
+//full window contructor
 Window::Window(int32 width, int32 height, const char title[], bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples)
 {
 	init(width, height, title, vSync, resizable, decorated, maximized, floating, samples);
@@ -39,7 +46,7 @@ void Window::init(int32 width, int32 height, const char title[], bool vSync, boo
 	glfwWindowHint(GLFW_OPENGL_PROFILE		 , GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE				   );
 
-	glfwWindowHint(GLFW_SAMPLES, samples >= 0 && samples <= INT_MAX ? samples : GLFW_DONT_CARE);
+	glfwWindowHint(GLFW_SAMPLES, samples >= 0 && samples <= 16 ? samples : GLFW_DONT_CARE);
 
 	glfwWindowHint(GLFW_RESIZABLE, resizable ? GLFW_TRUE : GLFW_FALSE);
 	glfwWindowHint(GLFW_DECORATED, decorated ? GLFW_TRUE : GLFW_FALSE);
@@ -56,15 +63,9 @@ void Window::init(int32 width, int32 height, const char title[], bool vSync, boo
 
 	if (width > 0 && height > 0) 
 	{
-		window = glfwCreateWindow(width, height, title, monitor, NULL);
+		window = glfwCreateWindow(width, height, title, NULL, NULL);
 		this->width = width;
 		this->height = height;
-	}
-	else if (width < 0 && height < 0)
-	{
-		window = glfwCreateWindow(mode->width, mode->height, title, monitor, NULL);
-		this->width = mode->width;
-		this->height = mode->height;
 	}
 	else
 	{
@@ -80,7 +81,11 @@ void Window::init(int32 width, int32 height, const char title[], bool vSync, boo
 		exit(-1);
 	}
 	else if (width > 0 && height > 0)
-		glfwSetWindowPos(window, (mode->width - width) / 2, (mode->height - height) / 2);
+	{
+		if (!maximized)
+			glfwSetWindowPos(window, (mode->width - width) / 2, (mode->height - height) / 2);
+		glfwSetWindowAspectRatio(window, 16, 9);
+	}
 
 	glfwMakeContextCurrent(window);
 
@@ -99,8 +104,9 @@ void Window::init(int32 width, int32 height, const char title[], bool vSync, boo
 	glClearColor(0, 0, 0, 1);
 
 	glEnable(GL_DEPTH_TEST);
-
+	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_BLEND);
+
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glfwSetWindowSizeCallback(window, windowSizeCallback);
