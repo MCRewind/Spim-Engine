@@ -10,15 +10,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-class Shader2c;
-class Shader2t;
-class Shader2f;
+class Shader_C;
+class Shader_T;
 
 class Shader {
 	public:
-		static Shader2c * SHADER2C;
-		static Shader2t * SHADER2T;
-		static Shader2f * SHADER2F;
+		static Shader_C * SHADER_C;
+		static Shader_T * SHADER_T;
 		static void init();
 		int getUniformLoc(const char* name);
 		void setProjection(glm::mat4);
@@ -35,31 +33,20 @@ class Shader {
 		uint32 loadShader(const char path[], int32 type);
 };
 
-class Shader2c : public Shader {
+class Shader_C : public Shader {
 	public:
-		Shader2c();
+		Shader_C();
 		void setColor(float r, float g, float b, float a);
-		~Shader2c();
+		~Shader_C();
 	private:
 		uint32 colorLoc;
 		void getUniformLocs();
 };
 
-
-class Shader2f : public Shader {
-public:
-	Shader2f();
-	void setColor(float r, float g, float b, float a);
-	~Shader2f();
-private:
-	uint32 colorLoc;
-	void getUniformLocs();
-};
-
-class Shader2t : public Shader {
+class Shader_T : public Shader {
 	public:
-		Shader2t();
-		~Shader2t();
+		Shader_T();
+		~Shader_T();
 };
 
 #endif

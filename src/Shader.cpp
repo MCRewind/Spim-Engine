@@ -5,8 +5,8 @@
 
 #include "Shader.h"
 
-Shader2c * Shader::SHADER2C = 0;
-Shader2t * Shader::SHADER2T = 0;
+Shader_C * Shader::SHADER_C = 0;
+Shader_T * Shader::SHADER_T = 0;
 
 Shader::Shader(const char vert[], const char frag[]) {
 	uint32 vertId = loadShader(vert, GL_VERTEX_SHADER);
@@ -73,8 +73,8 @@ uint32 Shader::loadShader(const char path[], int32 type) {
 }
 
 void Shader::init() {
-	SHADER2C = new Shader2c();
-	SHADER2T = new Shader2t();
+	SHADER_C = new Shader_C();
+	SHADER_T = new Shader_T();
 }
 
 GLint Shader::getUniformLoc(const char* name)
@@ -110,36 +110,21 @@ Shader::~Shader() {
 }
 
 //Shader2c - A shader for drawing 2d messhes with a solid color
-Shader2c::Shader2c() : Shader("res/shaders/s2c/vert.vs", "res/shaders/s2c/frag.fs") {
+Shader_C::Shader_C() : Shader("res/shaders/s_c/vert.vs", "res/shaders/s_c/frag.fs") {
 	getUniformLocs();
 }
 
-void Shader2c::getUniformLocs() {
+void Shader_C::getUniformLocs() {
 	colorLoc = glGetUniformLocation(program, "iColor");
 }
 
-void Shader2c::setColor(float r, float g, float b, float a) {
+void Shader_C::setColor(float r, float g, float b, float a) {
 	glUniform4f(colorLoc, r, g, b, a);
 }
 
-Shader2c::~Shader2c() {}
+Shader_C::~Shader_C() {}
 
 //Shader2t - A shader for drawing 2d textured meshes
-Shader2t::Shader2t() : Shader("res/shaders/s2t/vert.vs", "res/shaders/s2t/frag.fs") {}
+Shader_T::Shader_T() : Shader("res/shaders/s_t/vert.vs", "res/shaders/s_t/frag.fs") {}
 
-Shader2t::~Shader2t() {}
-
-//Shader2f - A shader for drawing 2d text a solid color
-Shader2f::Shader2f() : Shader("res/shaders/s2f/vert.vs", "res/shaders/s2f/frag.fs") {
-	getUniformLocs();
-}
-
-void Shader2f::getUniformLocs() {
-	colorLoc = glGetUniformLocation(program, "textColor");
-}
-
-void Shader2f::setColor(float r, float g, float b, float a) {
-	glUniform4f(colorLoc, r, g, b, a);
-}
-
-Shader2f::~Shader2f() {}
+Shader_T::~Shader_T() {}
