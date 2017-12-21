@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Shader.h"
 #include "Vao.h"
+#include "SSBO.h"
 
 class GameScene : public Scene
 {

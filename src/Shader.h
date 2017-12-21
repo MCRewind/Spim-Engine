@@ -1,8 +1,7 @@
 #ifndef __SHADER_H_
 #define __SHADER_H_
-#define __SHADER2C_H_
-#define __SHADER2T_H_
-#define __SHADER2F_H_
+#define __SHADER_C_H_
+#define __SHADER_T_H_
 
 #include "Types.h"
 

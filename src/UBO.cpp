@@ -11,17 +11,18 @@ UBO::UBO(int32 program, const char *block, const GLchar **names)
 
 	GLubyte *blockBuffer = (GLubyte *) malloc(blockSize);
 
-	// Query for the offsets of each block variable
+	//number of blocks / size of buffer
+	const GLsizei size = sizeof(names) / sizeof(GLchar*);
 
-	GLuint indices = sizeof(names) / sizeof(GLchar*);
-	glGetUniformIndices(program, 4, names, indices);
-
-	GLint offset[4];
-	glGetActiveUniformsiv(program, 4, indices,
-		GL_UNIFORM_OFFSET, offset);
+	// Query for the offsets of each block variable     
+	GLuint indices[size];
+	glGetUniformIndices(program, size, names, indices);
+	
+	GLint offset[size];
+	glGetActiveUniformsiv(program, size, indices, GL_UNIFORM_OFFSET, offset);
 }
 
 UBO::~UBO()
 {
 
-}
+} 
