@@ -14,6 +14,9 @@ public:
 	void update();
 	void render();
 	void setActive();
+	Vao* vao;
+	Shader_C* shader;
+	SSBO* ssbo;
 };
 
 #endif

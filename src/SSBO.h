@@ -3,13 +3,18 @@
 
 #include <GL\glew.h>
 
-struct buffer_data { };
+#include "Types.h"
+
+#include <initializer_list>
 
 class SSBO
 {
 public:
-	SSBO(buffer_data data);
+	template <class T>
+	SSBO(std::initializer_list<T> data);
 	~SSBO();
+	void write(int32 program, const char* buffer, GLuint index);
+	void bind(GLuint ssbo, int32 index);
 };
 
 #endif

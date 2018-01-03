@@ -8,7 +8,8 @@
 Shader_C * Shader::SHADER_C = 0;
 Shader_T * Shader::SHADER_T = 0;
 
-Shader::Shader(const char vert[], const char frag[]) {
+Shader::Shader(const char vert[], const char frag[]) 
+{
 	uint32 vertId = loadShader(vert, GL_VERTEX_SHADER);
 	uint32 fragId = loadShader(frag, GL_FRAGMENT_SHADER);
 	program = glCreateProgram();
@@ -19,7 +20,8 @@ Shader::Shader(const char vert[], const char frag[]) {
 	int result, length;
 	glGetProgramiv(program, GL_LINK_STATUS, &result);
 	glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
-	if (length > 0) {
+	if (length > 0) 
+	{
 		char * message = new char[length + 1];
 		glGetProgramInfoLog(program, length, 0, message);
 		fprintf(stderr, "%s\n", message);
@@ -32,14 +34,20 @@ Shader::Shader(const char vert[], const char frag[]) {
 	glDeleteShader(vertId);
 	glDeleteShader(fragId);
 
+	ssbo = new SSBO({ 0 });
+
+	/*
 	projLoc = getUniformLoc("proj");
 	viewLoc = getUniformLoc("view");
 	modelLoc = getUniformLoc("model");
+	*/
 }
 
-uint32 Shader::loadShader(const char path[], int32 type) {
+uint32 Shader::loadShader(const char path[], int32 type)
+{
 	std::ifstream fin(path, std::ifstream::binary);
-	if (fin) {
+	if (fin)
+	{
 		fin.seekg(0, fin.end);
 		int length = fin.tellg();
 		fin.seekg(0, fin.beg);
@@ -57,7 +65,8 @@ uint32 Shader::loadShader(const char path[], int32 type) {
 		int result;
 		glGetShaderiv(id, GL_COMPILE_STATUS, &result);
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-		if (length > 0) {
+		if (length > 0)
+		{
 			char * message = new char[length + 1];
 			glGetShaderInfoLog(id, length, 0, message);
 			fprintf(stderr, "%s\n", message);
@@ -72,7 +81,8 @@ uint32 Shader::loadShader(const char path[], int32 type) {
 	return 0;
 }
 
-void Shader::init() {
+void Shader::init() 
+{
 	SHADER_C = new Shader_C();
 	SHADER_T = new Shader_T();
 }
@@ -84,7 +94,8 @@ GLint Shader::getUniformLoc(const char* name)
 
 void Shader::setProjection(glm::mat4 projection)
 {
-	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	ssbo->write();
+	//glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 }
 
 void Shader::setView(glm::mat4 view)
@@ -97,28 +108,34 @@ void Shader::setModel(glm::mat4 model)
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 }
 
-void Shader::enable() {
+void Shader::enable()
+{
 	glUseProgram(program);
 }
 
-void Shader::disable() {
+void Shader::disable()
+{
 	glUseProgram(0);
 }
 
-Shader::~Shader() {
+Shader::~Shader() 
+{
 	glDeleteProgram(program);
 }
 
 //Shader2c - A shader for drawing 2d messhes with a solid color
-Shader_C::Shader_C() : Shader("res/shaders/s_c/vert.vs", "res/shaders/s_c/frag.fs") {
+Shader_C::Shader_C() : Shader("res/shaders/s_c/vert.vs", "res/shaders/s_c/frag.fs") 
+{
 	getUniformLocs();
 }
 
-void Shader_C::getUniformLocs() {
+void Shader_C::getUniformLocs()
+{
 	colorLoc = glGetUniformLocation(program, "iColor");
 }
 
-void Shader_C::setColor(float r, float g, float b, float a) {
+void Shader_C::setColor(float r, float g, float b, float a) 
+{
 	glUniform4f(colorLoc, r, g, b, a);
 }
 

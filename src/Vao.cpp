@@ -19,7 +19,7 @@ void Vao::addAttrib(float data[], int32 length, int32 size) {
 	glVertexAttribPointer(attrib, size, GL_FLOAT, 0, 0, (void*)0);
 	++attrib;
 }
-	
+
 void Vao::render() {
 	glBindVertexArray(vao);
 	for (int i = 0; i < attrib; ++i)

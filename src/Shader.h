@@ -4,6 +4,7 @@
 #define __SHADER_T_H_
 
 #include "Types.h"
+#include "SSBO.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -28,6 +29,7 @@ class Shader {
 		Shader(const char vert[], const char frag[]);
 		int32 program;
 	private:
+		SSBO* ssbo;
 		uint32 projLoc, viewLoc, modelLoc;
 		uint32 loadShader(const char path[], int32 type);
 };
