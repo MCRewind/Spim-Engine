@@ -34,13 +34,11 @@ Shader::Shader(const char vert[], const char frag[])
 	glDeleteShader(vertId);
 	glDeleteShader(fragId);
 
-	ssbo = new SSBO({ 0 });
-
-	/*
+	
 	projLoc = getUniformLoc("proj");
 	viewLoc = getUniformLoc("view");
 	modelLoc = getUniformLoc("model");
-	*/
+	
 }
 
 uint32 Shader::loadShader(const char path[], int32 type)
@@ -94,8 +92,7 @@ GLint Shader::getUniformLoc(const char* name)
 
 void Shader::setProjection(glm::mat4 projection)
 {
-	ssbo->write();
-	//glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 }
 
 void Shader::setView(glm::mat4 view)

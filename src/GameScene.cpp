@@ -27,7 +27,10 @@ void GameScene::update()
 void GameScene::render()
 {
 	shader->enable();
-	shader->setColor(1, 1, 0, 1);
+	shader->setProjection(camera->getProjection());
+	shader->setView(camera->getView());
+	shader->setModel(glm::mat4());
+	shader->setColor(0, 1, 1, 0);
 	vao->render();
 	shader->disable();
 }

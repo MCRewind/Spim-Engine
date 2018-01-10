@@ -6,15 +6,22 @@
 #include "Types.h"
 
 #include <initializer_list>
+#include <vector>
 
 class SSBO
 {
 public:
 	template <class T>
-	SSBO(std::initializer_list<T> data);
+	SSBO(std::vector<T> data);
 	~SSBO();
-	void write(int32 program, const char* buffer, GLuint index);
-	void bind(GLuint ssbo, int32 index);
+	void swap(int32 program, const char* buffer, GLuint index);
+	template <class T>
+	void write(std::vector<T> data);
+	void bind();
+	void bindBase(GLuint ssbo, int32 index);
+	GLuint getId();
+private:
+	GLuint ssbo;
 };
 
 #endif

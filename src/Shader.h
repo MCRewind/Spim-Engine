@@ -29,7 +29,6 @@ class Shader {
 		Shader(const char vert[], const char frag[]);
 		int32 program;
 	private:
-		SSBO* ssbo;
 		uint32 projLoc, viewLoc, modelLoc;
 		uint32 loadShader(const char path[], int32 type);
 };
