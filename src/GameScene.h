@@ -2,9 +2,8 @@
 #define __GAMESCENE_H_
 
 #include "Scene.h"
-#include "Shader.h"
-#include "Vao.h"
-#include "SSBO.h"
+#include "InputHander.h"
+#include "Rect.h"
 
 class GameScene : public Scene
 {
@@ -14,9 +13,8 @@ public:
 	void update();
 	void render();
 	void setActive();
-	Vao* vao;
-	Shader_C* shader;
-	SSBO* ssbo;
+	InputHandler* inputHandler;
+	ColRect* rect;
 };
 
 #endif

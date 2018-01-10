@@ -133,7 +133,7 @@ Rect::~Rect() {}
 //ColRect - Colored Rectangle
 
 ColRect::ColRect(Camera * camera, float r, float g, float b, float a, float x, float y, float z, float width, float height) : Rect(camera, x, y, z, width, height) {
-	shader = Shader::SHADER2C;
+	shader = Shader::SHADER_C;
 	this->r = r;
 	this->g = g;
 	this->b = b;
@@ -172,7 +172,7 @@ ColRect::~ColRect() {}
 
 TexRect::TexRect(Camera * camera, const char path[], float x, float y, float z, float width, float height) : Rect(camera, x, y, z, width, height) {
 	texture = new Texture(path);
-	shader = Shader::SHADER2T;
+	shader = Shader::SHADER_T;
 	if (!vao)
 		initVao();
 }
@@ -215,10 +215,9 @@ void TexRect::initVao() {
 
 MultiRect::MultiRect(Camera * camera, std::vector<const char *> paths, float x, float y, float z, float width, float height) : Rect(camera, x, y, z, width, height) {
 	textures = std::vector<Texture*>(paths.size());
-	//std::cout << textures.size() << std::endl; 
 	for (uint16 i = 0; i < paths.size(); i++)
 		textures.at(i) = new Texture(paths.at(i));
-	shader = Shader::SHADER2P;
+	shader = Shader::SHADER_T;
 	if (!vao)
 		initVao();
 }
@@ -266,12 +265,12 @@ void MultiRect::initVao() {
 	vao->addAttrib(texCoords, 4, 2);
 }
 
-Shader2p * MultiRect::getShader()
+Shader_T * MultiRect::getShader()
 {
 	return shader;
 }
 
 MultiRect::~MultiRect() {
 	textures.clear();
-	textures.shrink_to_fit();
+	textures.shrink_to_fit();	
 }

@@ -2,7 +2,7 @@
 #define __RECT_H_
 
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_Transform.hpp>
 #include "Camera.h"
 #include "Texture.h"
 #include "Shader.h"
@@ -52,7 +52,7 @@ public:
 	void render();
 	~ColRect();
 private:
-	Shader2c * shader;
+	Shader_C * shader;
 	static Vao * vao;
 	void initVao();
 	float r, g, b, a;
@@ -62,7 +62,7 @@ class TexRect : public Rect {
 public:
 	TexRect(Camera * camera, const char path[], float x, float y, float z, float width, float height);
 	void render();
-	Shader2t * getShader();
+	Shader_T * getShader();
 	~TexRect();
 private:
 	Texture * texture;
@@ -76,11 +76,11 @@ public:
 	MultiRect(Camera * camera, std::vector<const char *> paths, float x, float y, float z, float width, float height);
 	void render();
 	void render(int index);
-	Shader2p * getShader();
+	Shader_T * getShader();
 	~MultiRect();
 private:
 	std::vector<Texture *> textures;
-	Shader2p * shader;
+	Shader_T * shader;
 	static Vao * vao;
 	void initVao();
 };

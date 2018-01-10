@@ -120,8 +120,8 @@ Shader::~Shader()
 	glDeleteProgram(program);
 }
 
-//Shader2c - A shader for drawing 2d messhes with a solid color
-Shader_C::Shader_C() : Shader("res/shaders/s_c/vert.vs", "res/shaders/s_c/frag.fs") 
+//Shader_C - A shader for drawing 2d messhes with a solid color
+Shader_C::Shader_C() : Shader("res/shaders/s_C/vert.vs", "res/shaders/s_C/frag.fs") 
 {
 	getUniformLocs();
 }
@@ -138,7 +138,7 @@ void Shader_C::setColor(float r, float g, float b, float a)
 
 Shader_C::~Shader_C() {}
 
-//Shader2t - A shader for drawing 2d textured meshes
-Shader_T::Shader_T() : Shader("res/shaders/s_t/vert.vs", "res/shaders/s_t/frag.fs") {}
+//Shader_T - A shader for drawing 2d textured meshes
+Shader_T::Shader_T() : Shader("res/shaders/s_T/vert.vs", "res/shaders/s_T/frag.fs") {}
 
 Shader_T::~Shader_T() {}
