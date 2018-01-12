@@ -3,6 +3,7 @@
 
 #include "Window.h"
 #include "Command.h"
+#include "Types.h"
 
 class InputHandler
 {

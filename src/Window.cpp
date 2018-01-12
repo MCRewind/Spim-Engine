@@ -8,6 +8,9 @@ void windowSizeCallback(GLFWwindow* window, int32 width, int32 height);
 void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 void cursorPosCallback(GLFWwindow* window, double x, double y);
 void scrollCallback(GLFWwindow* window, double x, double y);
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+std::vector<uint16> keys;
 
 double mouseX, mouseY;
 double scrollX, scrollY;
@@ -113,12 +116,18 @@ void Window::init(int32 width, int32 height, const char title[], bool vSync, boo
 	glfwSetCursorPosCallback(window, cursorPosCallback);
 	glfwSetMouseButtonCallback(window, mouseButtonCallback);
 	glfwSetScrollCallback(window, scrollCallback);
+	glfwSetKeyCallback(window, keyCallback);
 
 	glfwSetWindowUserPointer(window, this);
+
+	keys = std::vector<uint16>(GLFW_KEY_LAST + 1);
 }
 
 void Window::poll() 
 {
+	for (int i = 0; i < GLFW_KEY_LAST + 1; i++)
+		if (keys[i] == 1)
+			++keys[i];
 	glfwPollEvents();
 }
 
@@ -160,11 +169,6 @@ bool Window::shouldClose()
 void Window::close()
 {
 	glfwSetWindowShouldClose(window, true);
-}
-
-bool Window::isKeyPressed(int32 key)
-{
-	return glfwGetKey(window, key) == GLFW_PRESS;
 }
 
 //returns mouse x position in screen coordinates
@@ -223,6 +227,11 @@ double Window::getScrollY()
 	return scrollY;
 }
 
+uint16 Window::getKey(int key)
+{
+	return keys[key];
+}
+
 Window::~Window()
 {
 	glfwDestroyWindow(window);
@@ -269,4 +278,9 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 		mouseLeft = true;
 	else
 		mouseLeft = false;
+}
+
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	keys[key] = action;
 }

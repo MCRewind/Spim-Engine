@@ -4,6 +4,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <functional>
+#include <map>
+#include <vector>
+
 #include "Camera.h"
 #include "Types.h"
 
@@ -24,7 +28,7 @@ public:
 	bool shouldClose();
 	void close();
 
-	bool isKeyPressed(int32);
+	uint16 getKey(int key);
 	double getMouseCX(Camera* camera);
 	double getMouseCY(Camera* camera);
 	double getMouseUX(Camera* camera);
@@ -42,7 +46,7 @@ public:
 private:
 	GLFWwindow * window;
 	int32 width, height;
-
+	
 	void init(int32 width, int32 height, const char title[], bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples);
 };
 
