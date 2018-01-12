@@ -2,10 +2,10 @@
 
 #include <iostream>
 
-void EmptyCommand::execute(GameActor& actor) { std::cout << "empty" << std::endl; }
+void EmptyCommand::execute(GameActor& actor) { actor.translateY(1); }
 
-void MoveLeftCommand::execute(GameActor& actor) { std::cout << "left" << std::endl; }
+void MoveLeftCommand::execute(GameActor& actor) { actor.translateX(-1); }
 
-void MoveRightCommand::execute(GameActor& actor) { std::cout << "right" << std::endl; }
+void MoveRightCommand::execute(GameActor& actor) { actor.translateX(1); }
 
-void JumpCommand::execute(GameActor& actor) { std::cout << "jump" << std::endl; }
+void JumpCommand::execute(GameActor& actor) { actor.translateY(-1); }

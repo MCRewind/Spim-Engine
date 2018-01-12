@@ -15,6 +15,7 @@ public:
 	void setActive();
 	InputHandler* inputHandler;
 	ColRect* rect;
+	GameActor* actor;
 };
 
 #endif

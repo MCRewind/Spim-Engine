@@ -14,10 +14,10 @@ InputHandler::InputHandler(Window* window)
 
 Command* InputHandler::handleInput()
 {
-	if (window->getKey(GLFW_KEY_W) == 1) return buttonW_;
-	if (window->getKey(GLFW_KEY_A) == 1) return buttonA_;
-	if (window->getKey(GLFW_KEY_S) == 1) return buttonS_;
-	if (window->getKey(GLFW_KEY_D) == 1) return buttonD_;
+	if (window->getKey(GLFW_KEY_W)) return buttonW_;
+	if (window->getKey(GLFW_KEY_A)) return buttonA_;
+	if (window->getKey(GLFW_KEY_S)) return buttonS_;
+	if (window->getKey(GLFW_KEY_D)) return buttonD_;
 
 	return NULL;
 }
