@@ -9,13 +9,12 @@ Vao * TexRect::vao = 0;
 Vao * MultiRect::vao = 0;
 
 Rect::Rect(Camera * camera, float x, float y, float z, float width, float height)
-{
-	this->camera = camera;
-	this->width = width;
-	this->height = height;
-	position = glm::vec3(x, y, z);
-	rotation = 0;
-}
+:	camera(camera),
+	width(width),
+	height(height),
+	position(glm::vec3(x, y, z)),
+	rotation(0)
+{}
 
 glm::mat4 Rect::fullTransform()
 {

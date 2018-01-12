@@ -2,15 +2,13 @@
 
 #include <iostream>
 
-InputHandler::InputHandler(Window* window)
-{
-	this->window = window;
-
-	buttonW_ = new JumpCommand();
-	buttonA_ = new MoveLeftCommand();
-	buttonS_ = new EmptyCommand();
-	buttonD_ = new MoveRightCommand();
-}
+InputHandler::InputHandler(Window* window) 
+:	window(window), 
+	buttonW_(new JumpCommand()),
+	buttonA_(new MoveLeftCommand()),
+	buttonS_(new EmptyCommand()),
+	buttonD_(new MoveRightCommand())
+{}
 
 Command* InputHandler::handleInput()
 {

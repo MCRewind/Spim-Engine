@@ -1,8 +1,9 @@
  #include "Vao.h"
 
-Vao::Vao(float vertices[], int32 num, uint32 indices[], int32 count) {
+Vao::Vao(float vertices[], int32 num, uint32 indices[], int32 count)
+:	 count(count)
+{
 	attrib = 0;
-	this->count = count;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 	addAttrib(vertices, num, 3);
@@ -11,7 +12,8 @@ Vao::Vao(float vertices[], int32 num, uint32 indices[], int32 count) {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(int), indices, GL_STATIC_DRAW);
 }
 
-void Vao::addAttrib(float data[], int32 length, int32 size) {
+void Vao::addAttrib(float data[], int32 length, int32 size) 
+{
 	glBindVertexArray(vao);
 	glGenBuffers(1, vbos + attrib);
 	glBindBuffer(GL_ARRAY_BUFFER, *(vbos + attrib));
@@ -20,7 +22,8 @@ void Vao::addAttrib(float data[], int32 length, int32 size) {
 	++attrib;
 }
 
-void Vao::render() {
+void Vao::render() 
+{
 	glBindVertexArray(vao);
 	for (int i = 0; i < attrib; ++i)
 		glEnableVertexAttribArray(i);
@@ -29,7 +32,8 @@ void Vao::render() {
 		glDisableVertexAttribArray(i);
 }
 
-Vao::~Vao() {
+Vao::~Vao() 
+{
 	glDeleteBuffers(1, &ibo);
 	glDeleteBuffers(attrib, vbos);
 	glDeleteVertexArrays(1, &vao);
