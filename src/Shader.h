@@ -9,6 +9,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_Transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <string>
 
 class Shader_C;
 class Shader_T;
@@ -18,7 +19,7 @@ class Shader {
 		static Shader_C * SHADER_C;
 		static Shader_T * SHADER_T;
 		static void init();
-		int getUniformLoc(const char* name);
+		int getUniformLoc(std::string name) const;
 		void setProjection(glm::mat4);
 		void setView(glm::mat4);
 		void setModel(glm::mat4);
@@ -26,11 +27,11 @@ class Shader {
 		void disable();
 		~Shader();
 	protected:
-		Shader(const char vert[], const char frag[]);
+		Shader(std::string vert, std::string frag);
 		int32 program;
 	private:
 		uint32 projLoc, viewLoc, modelLoc;
-		uint32 loadShader(const char path[], int32 type);
+		uint32 loadShader(std::string path, int32 type);
 };
 
 class Shader_C : public Shader {

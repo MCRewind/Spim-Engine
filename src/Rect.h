@@ -13,13 +13,13 @@ class Rect {
 public:
 	virtual void render() = 0;
 	glm::mat4 fullTransform();
-	float getX();
-	float getY();
-	glm::vec3 getPosition();
-	float getRotation();
-	float getWidth();
-	float getHeight();
-	glm::vec3 getDims();
+	float getX() const;
+	float getY() const;
+	glm::vec3 getPosition() const;
+	float getRotation() const;
+	float getWidth() const;
+	float getHeight() const;
+	glm::vec3 getDims() const;
 	void setX(float x);
 	void setY(float y);
 	void setZ(float z);
@@ -60,9 +60,8 @@ private:
 
 class TexRect : public Rect {
 public:
-	TexRect(Camera * camera, const char path[], float x, float y, float z, float width, float height);
+	TexRect(Camera * camera, std::string path, float x, float y, float z, float width, float height);
 	void render();
-	Shader_T * getShader();
 	~TexRect();
 private:
 	Texture * texture;
@@ -73,10 +72,10 @@ private:
 
 class MultiRect : public Rect {
 public:
-	MultiRect(Camera * camera, std::vector<const char *> paths, float x, float y, float z, float width, float height);
+	MultiRect(Camera * camera, std::vector<std::string> paths, float x, float y, float z, float width, float height);
 	void render();
 	void render(int index);
-	Shader_T * getShader();
+	Shader_T * getShader() const;
 	~MultiRect();
 private:
 	std::vector<Texture *> textures;

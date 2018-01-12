@@ -22,17 +22,17 @@ void Camera::setDims(int width, int height)
 	projection = glm::ortho(0.0f, (float) width, (float) height, 0.0f, 0.0f, 100.0f);
 }
 
-int Camera::getWidth()
+int Camera::getWidth() const
 {
 	return width;
 }
 
-int Camera::getHeight()
+int Camera::getHeight() const
 {
 	return height;
 }
 
-float Camera::getScale()
+float Camera::getScale() const
 {
 	return scale;
 }
@@ -54,7 +54,7 @@ void Camera::zoomo()
 	scale-=0.1;
 }
 
-glm::vec3 Camera::getPos()
+glm::vec3 Camera::getPos() const
 {
 	return position;
 }
@@ -66,7 +66,7 @@ void Camera::setPos(glm::vec3 vec)
 	position.z = -vec.z;
 }
 
-float Camera::getRotation()
+float Camera::getRotation() const
 {
 	return -rotation;
 }
@@ -81,12 +81,12 @@ void Camera::setRotation(float angle)
 	rotation = -angle;
 }
 
-glm::mat4 Camera::getProjection()
+glm::mat4 Camera::getProjection() const
 {
 	return projection;
 }
 
-glm::mat4 Camera::getView()
+glm::mat4 Camera::getView() const
 {
 	glm::mat4 temp;
 	temp = glm::translate(temp, position);

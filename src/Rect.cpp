@@ -8,7 +8,8 @@ Vao * ColRect::vao = 0;
 Vao * TexRect::vao = 0;
 Vao * MultiRect::vao = 0;
 
-Rect::Rect(Camera * camera, float x, float y, float z, float width, float height) {
+Rect::Rect(Camera * camera, float x, float y, float z, float width, float height)
+{
 	this->camera = camera;
 	this->width = width;
 	this->height = height;
@@ -25,31 +26,38 @@ glm::mat4 Rect::fullTransform()
 	return temp;
 }
 
-float Rect::getX() {
+float Rect::getX() const
+{
 	return position.x;
 }
 
-float Rect::getY() {
+float Rect::getY() const
+{
 	return position.y;
 }
 
-glm::vec3 Rect::getPosition() {
+glm::vec3 Rect::getPosition() const 
+{
 	return position;
 }
 
-float Rect::getRotation() {
+float Rect::getRotation() const 
+{
 	return rotation;
 }
 
-float Rect::getWidth() {
+float Rect::getWidth() const 
+{
 	return width;
 }
 
-float Rect::getHeight() {
+float Rect::getHeight() const 
+{
 	return height;
 }
 
-glm::vec3 Rect::getDims() {
+glm::vec3 Rect::getDims() const 
+{
 	return glm::vec3(width, height, 0);
 }
 
@@ -170,7 +178,7 @@ ColRect::~ColRect() {}
 
 //TexRect - Textured Rectangle
 
-TexRect::TexRect(Camera * camera, const char path[], float x, float y, float z, float width, float height) : Rect(camera, x, y, z, width, height) {
+TexRect::TexRect(Camera * camera, std::string path, float x, float y, float z, float width, float height) : Rect(camera, x, y, z, width, height) {
 	texture = new Texture(path);
 	shader = Shader::SHADER_T;
 	if (!vao)
@@ -213,7 +221,7 @@ void TexRect::initVao() {
 		delete texture;
 	}
 
-MultiRect::MultiRect(Camera * camera, std::vector<const char *> paths, float x, float y, float z, float width, float height) : Rect(camera, x, y, z, width, height) {
+MultiRect::MultiRect(Camera * camera, std::vector<std::string> paths, float x, float y, float z, float width, float height) : Rect(camera, x, y, z, width, height) {
 	textures = std::vector<Texture*>(paths.size());
 	for (uint16 i = 0; i < paths.size(); i++)
 		textures.at(i) = new Texture(paths.at(i));
@@ -265,7 +273,7 @@ void MultiRect::initVao() {
 	vao->addAttrib(texCoords, 4, 2);
 }
 
-Shader_T * MultiRect::getShader()
+Shader_T * MultiRect::getShader() const
 {
 	return shader;
 }

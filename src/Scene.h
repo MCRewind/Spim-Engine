@@ -9,7 +9,7 @@ class Scene {
 		virtual void update() = 0;
 		virtual void render() = 0;
 		virtual void setActive() = 0;
-		int getState();
+		int getState() const;
 	protected:	
 		Window* window;
 		Camera* camera;

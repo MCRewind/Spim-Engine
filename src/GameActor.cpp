@@ -5,22 +5,22 @@ GameActor::GameActor()
 	position = { 0, 0, 0 };
 }
 
-float GameActor::getX()
+float GameActor::getX() const
 {
 	return position.x;
 };
 
-float GameActor::getY() 
+float GameActor::getY()  const
 {
 	return position.y;
 };
 
-float GameActor::getZ()
+float GameActor::getZ() const
 { 
 	return position.z; 
 };
 
-glm::vec3 GameActor::getPosition()
+glm::vec3 GameActor::getPosition() const
 {
 	return position; 
 };

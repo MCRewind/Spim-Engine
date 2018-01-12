@@ -4,6 +4,7 @@
 #include "Types.h"
 
 #include <GL/glew.h>
+#include <array>
 
 class Vao 
 {

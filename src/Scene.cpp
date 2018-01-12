@@ -5,7 +5,7 @@ Scene::Scene(Window* window, Camera* camera) {
 	this->camera = camera;
 }
 
-int Scene::getState()
+int Scene::getState() const
 {
 	return state;
 }

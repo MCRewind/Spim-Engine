@@ -13,32 +13,32 @@
 
 class Window {
 public:
-	Window(int32 width, int32 height, const char title[]);
-	Window(int32 width, int32 height, const char title[], bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples);
+	Window(int32 width, int32 height, std::string title);
+	Window(int32 width, int32 height, std::string title, bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples);
 
 	void poll();
 	void clear();
 	void swap();
 
-	int32 getWidth();
-	int32 getHeight();
+	int32 getWidth() const;
+	int32 getHeight() const;
 	void setWidth(int32 width);
 	void setHeight(int32 height);
 
 	bool shouldClose();
 	void close();
 
-	uint16 getKey(int key);
-	double getMouseCX(Camera* camera);
-	double getMouseCY(Camera* camera);
-	double getMouseUX(Camera* camera);
-	double getMouseUY(Camera* camera);
-	double getMouseX();
-	double getMouseY();
-	bool getMouseLeft();
-	bool getMouseRight();
-	double getScrollX();
-	double getScrollY();
+	uint16 getKey(int key) const;
+	double getMouseCX(Camera* camera) const;
+	double getMouseCY(Camera* camera) const;
+	double getMouseUX(Camera* camera) const;
+	double getMouseUY(Camera* camera) const;
+	double getMouseX() const;
+	double getMouseY() const;
+	bool getMouseLeft() const;
+	bool getMouseRight() const;
+	double getScrollX() const;
+	double getScrollY() const;
 
 	~Window();
 
@@ -47,7 +47,7 @@ private:
 	GLFWwindow * window;
 	int32 width, height;
 	
-	void init(int32 width, int32 height, const char title[], bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples);
+	void init(int32 width, int32 height, std::string title, bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples);
 };
 
 #endif

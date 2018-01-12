@@ -2,11 +2,12 @@
 #define __TEXTURE_H_
 
 #include <GL/glew.h>
+#include <string>
 
 class Texture
 {
 public:
-	Texture(const char* path);
+	Texture(std::string path);
 	~Texture();
 	void bind();
 	void unbind();

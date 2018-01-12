@@ -7,10 +7,10 @@ class GameActor
 {
 public:
 	GameActor();
-	float getX();
-	float getY();
-	float getZ();
-	glm::vec3 getPosition();
+	float getX() const;
+	float getY() const;
+	float getZ() const;
+	glm::vec3 getPosition() const;
 	void setX(float x);
 	void setY(float y);
 	void setZ(float z);

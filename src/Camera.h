@@ -10,17 +10,17 @@ public:
 	Camera(int width, int height);
 	~Camera();
 	void setDims(int width, int height);
-	int getWidth();
-	int getHeight();
+	int getWidth() const;
+	int getHeight() const;
 	void translate(glm::vec3);
-	glm::vec3 getPos();
+	glm::vec3 getPos() const;
 	void setPos(glm::vec3);
-	float getRotation();
+	float getRotation() const;
 	void rotate(float angle);
 	void setRotation(float angle);
-	glm::mat4 getProjection();
-	glm::mat4 getView();
-	float getScale();
+	glm::mat4 getProjection() const;
+	glm::mat4 getView() const;
+	float getScale() const;
 	void zoomi();
 	void zoomo();
 private:

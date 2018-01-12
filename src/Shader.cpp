@@ -8,7 +8,7 @@
 Shader_C * Shader::SHADER_C = 0;
 Shader_T * Shader::SHADER_T = 0;
 
-Shader::Shader(const char vert[], const char frag[]) 
+Shader::Shader(std::string vert, std::string frag)
 {
 	uint32 vertId = loadShader(vert, GL_VERTEX_SHADER);
 	uint32 fragId = loadShader(frag, GL_FRAGMENT_SHADER);
@@ -41,7 +41,7 @@ Shader::Shader(const char vert[], const char frag[])
 	
 }
 
-uint32 Shader::loadShader(const char path[], int32 type)
+uint32 Shader::loadShader(std::string path, int32 type)
 {
 	std::ifstream fin(path, std::ifstream::binary);
 	if (fin)
@@ -85,9 +85,9 @@ void Shader::init()
 	SHADER_T = new Shader_T();
 }
 
-GLint Shader::getUniformLoc(const char* name)
+GLint Shader::getUniformLoc(std::string name) const
 {
-	return glGetUniformLocation(program, name);
+	return glGetUniformLocation(program, name.c_str());
 }
 
 void Shader::setProjection(glm::mat4 projection)

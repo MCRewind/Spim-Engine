@@ -17,18 +17,18 @@ double scrollX, scrollY;
 bool mouseLeft, mouseRight;
 
 //simple window constructor
-Window::Window(int32 width, int32 height, const char title[])
+Window::Window(int32 width, int32 height, std::string title)
 {
 	init(width, height, title, false, true, true, false, false, 17);
 }
 
 //full window contructor
-Window::Window(int32 width, int32 height, const char title[], bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples)
+Window::Window(int32 width, int32 height, std::string title, bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples)
 {
 	init(width, height, title, vSync, resizable, decorated, maximized, floating, samples);
 }
 
-void Window::init(int32 width, int32 height, const char title[], bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples) 
+void Window::init(int32 width, int32 height, std::string title, bool vSync, bool resizable, bool decorated, bool maximized, bool floating, uint8 samples)
 {
 	glfwSetErrorCallback(errorCallback);
 
@@ -66,13 +66,13 @@ void Window::init(int32 width, int32 height, const char title[], bool vSync, boo
 
 	if (width > 0 && height > 0) 
 	{
-		window = glfwCreateWindow(width, height, title, NULL, NULL);
+		window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
 		this->width = width;
 		this->height = height;
 	}
 	else
 	{
-		window = glfwCreateWindow(mode->width, mode->height, title, monitor, NULL);
+		window = glfwCreateWindow(mode->width, mode->height, title.c_str(), monitor, NULL);
 		this->width = mode->width;
 		this->height = mode->height;
 	}
@@ -141,12 +141,12 @@ void Window::swap()
 	glfwSwapBuffers(window);
 }
 
-int32 Window::getWidth()
+int32 Window::getWidth() const
 {
 	return width;
 }
 
-int32 Window::getHeight() 
+int32 Window::getHeight() const
 {
 	return height;
 }
@@ -172,62 +172,62 @@ void Window::close()
 }
 
 //returns mouse x position in screen coordinates
-double Window::getMouseX()
+double Window::getMouseX() const
 {
 	return mouseX;
 }
 
 //returns mouse y position in screen coordinates
-double Window::getMouseY()
+double Window::getMouseY() const
 {
 	return mouseY;
 }
 
 //returns mouse x position in translated and scaled camera coordinates
-double Window::getMouseCX(Camera* camera)
+double Window::getMouseCX(Camera* camera) const
 {
 	return ((((mouseX * camera->getWidth()) / width) - camera->getPos().x) / camera->getScale());
 }
 
 //returns mouse y position in translated and scaled camera coordinates
-double Window::getMouseCY(Camera* camera)
+double Window::getMouseCY(Camera* camera) const
 {
 	return ((((mouseY * camera->getHeight()) / height) - camera->getPos().y) / camera->getScale());
 }
 
 //returns mouse x position in un-translated camera coordinates
-double Window::getMouseUX(Camera* camera)
+double Window::getMouseUX(Camera* camera) const
 {
 	return ((mouseX * camera->getWidth()) / width);
 }
 
 //returns mouse y position in un-translated camera coordinates
-double Window::getMouseUY(Camera* camera)
+double Window::getMouseUY(Camera* camera) const
 {
 	return ((mouseY * camera->getHeight()) / height);
 }
 
-bool Window::getMouseLeft()
+bool Window::getMouseLeft() const
 {
 	return mouseLeft;
 }
 
-bool Window::getMouseRight()
+bool Window::getMouseRight() const
 {
 	return mouseRight;
 }
 
-double Window::getScrollX()
+double Window::getScrollX() const
 {
 	return scrollX;
 }
 
-double Window::getScrollY()
+double Window::getScrollY() const
 {
 	return scrollY;
 }
 
-uint16 Window::getKey(int key)
+uint16 Window::getKey(int key) const
 {
 	return keys[key];
 }
