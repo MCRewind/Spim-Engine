@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "InputHander.h"
 #include "Rect.h"
+#include "World.h"
 
 class GameScene : public Scene
 {
@@ -16,6 +17,7 @@ public:
 	InputHandler* inputHandler;
 	ColRect* rect;
 	GameActor* actor;
+	World* world;
 };
 
 #endif
