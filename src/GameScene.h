@@ -5,6 +5,8 @@
 #include "InputHander.h"
 #include "Rect.h"
 #include "World.h"
+#include "Subject.h"
+#include "Statistics.h"
 
 class GameScene : public Scene
 {
@@ -18,6 +20,8 @@ public:
 	ColRect* rect;
 	GameActor* actor;
 	World* world;
+	Subject* subject;
+	Statistics* statistics;
 };
 
 #endif
