@@ -13,6 +13,7 @@ public:
 class EmptyCommand : public Command { void execute(GameActor& actor); };
 class MoveLeftCommand : public Command { void execute(GameActor& actor); };
 class MoveRightCommand : public Command { void execute(GameActor& actor); };
-class JumpCommand : public Command { void execute(GameActor& actor); };
+class MoveUpCommand : public Command { void execute(GameActor& actor); };
+class MoveDownCommand : public Command { void execute(GameActor& actor); };
 
 #endif

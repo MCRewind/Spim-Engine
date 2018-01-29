@@ -23,7 +23,7 @@ void Subject::removeObserver(Observer *observer)
 //notifies this subjects observers of an event
 void Subject::notify(GameActor &object, int event)
 {
-	std::for_each(observers.begin(), observers.end(),
+	std::for_each(observers.begin(), observers.end(),  
 		[=](Observer * observer)		
 		{
 			observer->onNotify(object, event);

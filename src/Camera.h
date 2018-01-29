@@ -4,7 +4,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_Transform.hpp>
 
-class Camera
+#include "GameActor.h"
+
+class Camera : public GameActor
 {
 public:
 	Camera(int width, int height);
@@ -12,9 +14,6 @@ public:
 	void setDims(int width, int height);
 	int getWidth() const;
 	int getHeight() const;
-	void translate(glm::vec3);
-	glm::vec3 getPos() const;
-	void setPos(glm::vec3);
 	float getRotation() const;
 	void rotate(float angle);
 	void setRotation(float angle);
@@ -26,7 +25,6 @@ public:
 private:
 	float width, height, rotation, scale;
 	glm::mat4 projection;
-	glm::vec3 position;
 };
 
 #endif 

@@ -186,13 +186,13 @@ double Window::getMouseY() const
 //returns mouse x position in translated and scaled camera coordinates
 double Window::getMouseCX(Camera* camera) const
 {
-	return ((((mouseX * camera->getWidth()) / width) - camera->getPos().x) / camera->getScale());
+	return ((((mouseX * camera->getWidth()) / width) - camera->getPosition().x) / camera->getScale());
 }
 
 //returns mouse y position in translated and scaled camera coordinates
 double Window::getMouseCY(Camera* camera) const
 {
-	return ((((mouseY * camera->getHeight()) / height) - camera->getPos().y) / camera->getScale());
+	return ((((mouseY * camera->getHeight()) / height) - camera->getPosition().y) / camera->getScale());
 }
 
 //returns mouse x position in un-translated camera coordinates

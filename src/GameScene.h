@@ -7,6 +7,7 @@
 #include "World.h"
 #include "Subject.h"
 #include "Statistics.h"
+#include "Player.h"
 
 class GameScene : public Scene
 {
@@ -17,11 +18,10 @@ public:
 	void render();
 	void setActive();
 	InputHandler* inputHandler;
-	ColRect* rect;
-	GameActor* actor;
 	World* world;
 	Subject* subject;
 	Statistics* statistics;
+	Player* player;
 };
 
 #endif
