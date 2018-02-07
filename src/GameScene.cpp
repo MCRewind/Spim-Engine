@@ -38,19 +38,18 @@ void GameScene::update()
 			break;
 		}
 	}
-	if (window->getKey(GLFW_KEY_N))
+	if (window->getKey(GLFW_KEY_SLASH))
 		camera->zoomi();
-	else if (window->getKey(GLFW_KEY_M))
+	else if (window->getKey(GLFW_KEY_PERIOD))
 		camera->zoomo();
 	//subject->notify(*actor, Statistics::EVENT_ACTION);
-	
+	while (world->checkCollision(player));
 }
 
 void GameScene::render()
 {
 	player->renderPos(player->getPosition().x, player->getPosition().y);
 	world->render();
-	while (world->checkCollision(player));
 }
 
 void GameScene::setActive()

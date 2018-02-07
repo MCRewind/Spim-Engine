@@ -10,7 +10,7 @@ void cursorPosCallback(GLFWwindow* window, double x, double y);
 void scrollCallback(GLFWwindow* window, double x, double y);
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-std::vector<uint16> keys;
+std::vector<uint16> keys, keys_last;
 
 double mouseX, mouseY;
 double scrollX, scrollY;
@@ -121,13 +121,17 @@ void Window::init(int32 width, int32 height, std::string title, bool vSync, bool
 	glfwSetWindowUserPointer(window, this);
 
 	keys = std::vector<uint16>(GLFW_KEY_LAST + 1);
+	keys_last = std::vector<uint16>(keys.size());
 }
 
 void Window::poll() 
 {
 	for (int i = 0; i < GLFW_KEY_LAST + 1; i++)
+	{
+		keys_last[i] = keys[i];
 		if (keys[i] == 1)
 			++keys[i];
+	}
 	glfwPollEvents();
 }
 
@@ -230,6 +234,11 @@ double Window::getScrollY() const
 uint16 Window::getKey(int key) const
 {
 	return keys[key];
+}
+
+uint16 Window::getKeyRelease(int key) const
+{
+	return keys_last[key] && !keys[key];
 }
 
 Window::~Window()

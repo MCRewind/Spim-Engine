@@ -13,13 +13,13 @@ public:
 	void hitLeft();
 	void hitRight();
 	void hitBottom();
+	void hitNothing();
 	void alignHitbox();
 private:
 	Window * window;
-	uint8 SPEED = 84;
-	const uint8 SPACE_HELD = 12, WALL_SLIDE = 10;
-	uint16 space = 0;
-	bool grounded = true, jump = false;
+	const uint8 SPACE_HELD = 12, WALL_SLIDE = 10, MAX_JUMPS = 1;
+	uint8 SPEED = 80, jumps = MAX_JUMPS;
+	bool grounded = true, sliding = false, canJump = true;
 };
 
 #endif 

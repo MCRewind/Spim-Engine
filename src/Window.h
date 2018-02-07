@@ -29,6 +29,7 @@ public:
 	void close();
 
 	uint16 getKey(int key) const;
+	uint16 getKeyRelease(int key) const;
 	double getMouseCX(Camera* camera) const;
 	double getMouseCY(Camera* camera) const;
 	double getMouseUX(Camera* camera) const;

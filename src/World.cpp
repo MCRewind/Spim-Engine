@@ -33,6 +33,7 @@ void World::generateTerrain()
 			else
 				tiles[x * height + y] = &airTerrain;
 		}
+	int t = 0;
 }
 
 const Terrain& World::getTile(int x, int y) const

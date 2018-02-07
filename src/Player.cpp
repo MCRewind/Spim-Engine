@@ -15,53 +15,38 @@ void Player::update()
 {
 	bool direction = false;
 
-	bool left  = window->getKey(GLFW_KEY_A);
+	bool left = window->getKey(GLFW_KEY_A);
 	bool right = window->getKey(GLFW_KEY_D);
-	bool up	   = window->getKey(GLFW_KEY_W);
-	bool down  = window->getKey(GLFW_KEY_S);
+	bool up = window->getKey(GLFW_KEY_W);
+	bool down = window->getKey(GLFW_KEY_S);
 
-	if (right && !left)
-	{
-		if (grounded)
-			setVelX(SPEED);
-		else if (getVelocity().x < SPEED) {
-			setVelX(getVelocity().x + (SPEED * 0.1));
-			if (getVelocity().x > SPEED)
-				setVelX(SPEED);
-		}
-		direction = true;
-	}
-	if (left && !right) {
-		if (grounded)
-			setVelX(-SPEED);
-		else if (getVelocity().x > -SPEED) {
-			setVelX(getVelocity().x - (SPEED * 0.1));
-			if (getVelocity().x < -SPEED)
-				setVelX(-SPEED);
-		}
-		direction = true;
-	}
-
-	if (!direction && grounded)
+	if (left && !right)
+		setVelX(-SPEED);
+	else if (right && !left)
+		setVelX(SPEED);
+	else
 		setVelX(0);
-	if (window->getKey(GLFW_KEY_SPACE) || window->getKey(GLFW_KEY_W)) {
-		if (grounded) {
-			jump = true;
-			setVelY(-256);
+
+	if (window->getKeyRelease(GLFW_KEY_W))
+		canJump = true;
+
+	if (jumps > 0)
+	{
+		if (up && canJump && (grounded || sliding))
+		{
+			setVelY(-200);
+			--jumps;
+			canJump = false;
 			grounded = false;
-			space = 1;
+			sliding = false;
 		}
-		else if (space > 0 && space < SPACE_HELD && jump)
-			setVelY(getVelocity().y - getGravity() * (SPACE_HELD - space + 1) / SPACE_HELD);
-		++space;
 	}
-	else {
-		space = 0;
-		jump = false;
-	}
+
+	if ((grounded || sliding) && jumps < MAX_JUMPS)
+		++jumps;
+
 	setVelY(getVelocity().y + getGravity());
 
-	grounded = false;
 	setPosition(getPosition() + (getVelocity() * (float)deltaTime));
 	getHitbox()->setPosition(getPosition());
 }
@@ -79,26 +64,29 @@ void Player::hitTop()
 void Player::hitLeft() {
 	setVelX(0);
 	if (getVelocity().y > WALL_SLIDE)
+	{
 		setVelY(WALL_SLIDE);
-	if (!grounded && space == 1) {
-		jump = true;
-		setVelX(160);
-		setVelY(-140);
 	}
+	sliding = true;
 }
 
 void Player::hitRight() {
 	setVelX(0);
 	if (getVelocity().y > WALL_SLIDE)
+	{
 		setVelY(WALL_SLIDE);
-	if (!grounded && space == 1) {
-		jump = true;
-		setVelX(-160);
-		setVelY(-140);
 	}
+	sliding = true;
 }
+
 void Player::hitBottom()
 {
 	setVelY(0);
 	grounded = true;
+	sliding = false;
+}
+
+void Player::hitNothing()
+{
+	std::cout << "sdgfsdfgsfdg" << std::endl;
 }
