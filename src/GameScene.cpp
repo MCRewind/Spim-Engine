@@ -1,5 +1,6 @@
 #include "GameScene.h"
 
+
 /*
 TODO:
 - Add entity system
@@ -44,12 +45,19 @@ void GameScene::update()
 		camera->zoomo();
 	//subject->notify(*actor, Statistics::EVENT_ACTION);
 	while (world->checkCollision(player));
+
+	{
+		ImGui::Begin("Another Window", 1 ^ 1);
+		ImGui::Text("Hello from another window!");
+		ImGui::End();
+	}
 }
 
 void GameScene::render()
 {
 	player->renderPos(player->getPosition().x, player->getPosition().y);
 	world->render();
+	ImGui::Render();
 }
 
 void GameScene::setActive()

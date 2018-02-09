@@ -1,5 +1,5 @@
 #include <iostream>
-#include <GL\glew.h>
+
 
 #include "Window.h"
 
@@ -47,8 +47,9 @@ void Window::init(int32 width, int32 height, std::string title, bool vSync, bool
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3					   );
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3					   );
 	glfwWindowHint(GLFW_OPENGL_PROFILE		 , GLFW_OPENGL_CORE_PROFILE);
+#if __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE				   );
-
+#endif
 	glfwWindowHint(GLFW_SAMPLES, samples >= 0 && samples <= 16 ? samples : GLFW_DONT_CARE);
 
 	glfwWindowHint(GLFW_RESIZABLE, resizable ? GLFW_TRUE : GLFW_FALSE);
@@ -120,6 +121,9 @@ void Window::init(int32 width, int32 height, std::string title, bool vSync, bool
 
 	glfwSetWindowUserPointer(window, this);
 
+	ImGui_ImplGlfwGL3_Init(window, true);
+	ImGui::StyleColorsClassic();
+
 	keys = std::vector<uint16>(GLFW_KEY_LAST + 1);
 	keys_last = std::vector<uint16>(keys.size());
 }
@@ -133,6 +137,7 @@ void Window::poll()
 			++keys[i];
 	}
 	glfwPollEvents();
+	ImGui_ImplGlfwGL3_NewFrame();
 }
 
 void Window::clear()
